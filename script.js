@@ -4,6 +4,7 @@ const themeToggle = document.getElementById("themeToggle");
 const clockEl = document.getElementById("clock");
 const headerSearch = document.getElementById("headerSearch");
 const searchResults = document.getElementById("searchResults");
+const musicToggle = document.querySelector(".icon-actions .icon-btn");
 
 const routes = [
   { id: "intro", label: "Introduction", file: "index.html" },
@@ -31,6 +32,91 @@ function updateClock() {
 function setTheme(theme) {
   docEl.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
+}
+
+function initMusicControl() {
+  if (!musicToggle) {
+    return;
+  }
+
+  let audioContext;
+  let loopTimer;
+  let step = 0;
+  let isPlaying = false;
+  const notes = [261.63, 329.63, 392.0, 329.63, 349.23, 440.0, 392.0, 329.63];
+
+  function playNote(freq) {
+    if (!audioContext) {
+      return;
+    }
+
+    const now = audioContext.currentTime;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(freq, now);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.045, now + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    osc.start(now);
+    osc.stop(now + 0.29);
+  }
+
+  function updateMusicButton() {
+    musicToggle.textContent = isPlaying ? "❚❚" : "♫";
+    musicToggle.classList.toggle("is-active", isPlaying);
+    musicToggle.setAttribute("aria-label", isPlaying ? "Pause music" : "Play music");
+  }
+
+  function stopMusic() {
+    if (loopTimer) {
+      clearInterval(loopTimer);
+      loopTimer = null;
+    }
+    isPlaying = false;
+    updateMusicButton();
+  }
+
+  async function startMusic() {
+    if (!audioContext) {
+      audioContext = new window.AudioContext();
+    }
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
+    isPlaying = true;
+    step = 0;
+    updateMusicButton();
+    playNote(notes[step]);
+    step += 1;
+
+    loopTimer = setInterval(() => {
+      playNote(notes[step % notes.length]);
+      step += 1;
+    }, 320);
+  }
+
+  musicToggle.addEventListener("click", async () => {
+    if (isPlaying) {
+      stopMusic();
+      return;
+    }
+
+    try {
+      await startMusic();
+    } catch {
+      stopMusic();
+      alert("Unable to start audio. Please check your browser audio permissions.");
+    }
+  });
+
+  updateMusicButton();
 }
 
 function toggleTheme() {
@@ -96,6 +182,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 themeToggle?.addEventListener("click", toggleTheme);
+initMusicControl();
 
 headerSearch?.addEventListener("input", (e) => {
   filterRoutes(e.target.value);
@@ -128,3 +215,40 @@ document.addEventListener("click", (e) => {
     hideSearchResults();
   }
 });
+
+function initContactForm() {
+  const form = document.querySelector(".contact-form");
+  if (!form) {
+    return;
+  }
+
+  const statusEl = document.getElementById("contactStatus");
+  const recipient = form.dataset.recipient || "tinaamarion@gmail.com";
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!name || !email || !message || !emailValid) {
+      if (statusEl) {
+        statusEl.textContent = "Please enter a valid name, email, and message.";
+      }
+      return;
+    }
+
+    const subject = `Portfolio contact from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    if (statusEl) {
+      statusEl.textContent = "Opening your email app to send the message...";
+    }
+    window.location.href = mailtoUrl;
+  });
+}
+
+initContactForm();

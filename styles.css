@@ -1,23 +1,25 @@
 :root {
-  --bg: #f4f5f7;
-  --surface: #ffffff;
-  --surface-soft: #f4f4f6;
+  --bg: #dbe5ff;
+  --surface: #edf2ff;
+  --surface-soft: #d7e2ff;
   --text: #0f1117;
-  --muted: #6b6f7b;
-  --line: #e3e5ed;
-  --active: #e8e9ee;
-  --pill: #ffffff;
+  --muted: #4d5772;
+  --line: #b9c7eb;
+  --active: #c9d8fb;
+  --pill: #f2f6ff;
+  --flower-opacity: 0.45;
 }
 
 html[data-theme="dark"] {
-  --bg: #05060b;
-  --surface: #070912;
-  --surface-soft: #f3f4f6;
+  --bg: #070f26;
+  --surface: #0c1a3a;
+  --surface-soft: #132850;
   --text: #f1f3f8;
   --muted: #8d91a0;
-  --line: #1b1f2d;
-  --active: #2a2e3b;
-  --pill: #0f1220;
+  --line: #1d315d;
+  --active: #17305f;
+  --pill: #0f2349;
+  --flower-opacity: 0.32;
 }
 
 * {
@@ -39,6 +41,28 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Manrope", "Segoe UI", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--flower-opacity);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
+    radial-gradient(circle at 9% 14%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
+    radial-gradient(circle at 15% 14%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
+    radial-gradient(circle at 12% 10%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
+    radial-gradient(circle at 12% 14%, rgba(255, 228, 170, 0.26) 0 6px, transparent 7px),
+    radial-gradient(circle at 85% 76%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
+    radial-gradient(circle at 82% 72%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
+    radial-gradient(circle at 88% 72%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
+    radial-gradient(circle at 85% 68%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
+    radial-gradient(circle at 85% 72%, rgba(255, 238, 184, 0.3) 0 5px, transparent 6px);
 }
 
 .topbar {
@@ -59,7 +83,16 @@ body {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  min-width: 170px;
+  min-width: 56px;
+}
+
+.brand-photo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  display: block;
 }
 
 .brand-mark {
@@ -186,6 +219,11 @@ body {
   background: var(--pill);
 }
 
+.icon-btn.is-active {
+  border-color: var(--line);
+  background: var(--pill);
+}
+
 .github-mark-btn {
   padding: 0;
 }
@@ -210,7 +248,7 @@ body {
 
 .sidebar h2 {
   margin: 0 0 1rem;
-  font-size: 2.8rem;
+  font-size: 2.3rem;
   letter-spacing: -0.04em;
 }
 
@@ -224,7 +262,7 @@ body {
   text-decoration: none;
   padding: 0.58rem 0.66rem;
   border-radius: 12px;
-  font-size: 2rem;
+  font-size: 1.75rem;
   letter-spacing: -0.03em;
 }
 
@@ -240,14 +278,14 @@ body {
 
 .content-page h1 {
   margin: 0;
-  font-size: clamp(3rem, 5.8vw, 5.2rem);
+  font-size: clamp(2.4rem, 4.8vw, 4.3rem);
   letter-spacing: -0.05em;
 }
 
 .content-page h2 {
   margin: 0.55rem 0 1.5rem;
   color: var(--muted);
-  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-size: clamp(1.9rem, 4.8vw, 3.4rem);
   letter-spacing: -0.05em;
   line-height: 1.03;
 }
@@ -255,7 +293,7 @@ body {
 .content-page p {
   margin: 0;
   max-width: 1300px;
-  font-size: clamp(1.08rem, 1.55vw, 1.55rem);
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
   letter-spacing: -0.02em;
   line-height: 1.5;
 }
@@ -264,7 +302,7 @@ body {
   margin-top: 4rem;
   display: flex;
   justify-content: space-between;
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   letter-spacing: -0.04em;
 }
 
@@ -350,9 +388,11 @@ body {
   font-size: 0.98rem;
 }
 
-.skill-chip .mini {
-  font-size: 0.82rem;
-  color: #4f5565;
+.skill-icon {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .muted-block {
@@ -529,13 +569,15 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
-  background: #11131b;
+  background: color-mix(in srgb, var(--surface) 90%, #0c142c);
 }
 
 .award-card img {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 290px;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--bg) 72%, #ffffff 28%);
+  padding: 0.35rem;
   display: block;
 }
 
