@@ -45,24 +45,56 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
-  content: "";
+.floating-flower {
   position: fixed;
-  inset: 0;
   pointer-events: none;
-  z-index: -1;
-  opacity: var(--flower-opacity);
-  background:
-    radial-gradient(circle at 12% 18%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
-    radial-gradient(circle at 9% 14%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
-    radial-gradient(circle at 15% 14%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
-    radial-gradient(circle at 12% 10%, rgba(255, 183, 197, 0.18) 0 16px, transparent 17px),
-    radial-gradient(circle at 12% 14%, rgba(255, 228, 170, 0.26) 0 6px, transparent 7px),
-    radial-gradient(circle at 85% 76%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
-    radial-gradient(circle at 82% 72%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
-    radial-gradient(circle at 88% 72%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
-    radial-gradient(circle at 85% 68%, rgba(170, 211, 255, 0.2) 0 14px, transparent 15px),
-    radial-gradient(circle at 85% 72%, rgba(255, 238, 184, 0.3) 0 5px, transparent 6px);
+  z-index: 2;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+html:not([data-theme="dark"]) .floating-flower {
+  filter: saturate(1.6) brightness(0.55);
+}
+
+@keyframes flowerFloatUp {
+  0%   { transform: translateY(110vh) translateX(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
+  8%   { opacity: 0.65; }
+  25%  { transform: translateY(75vh)  translateX(55px)  rotate(90deg)  scale(0.9); }
+  50%  { transform: translateY(50vh)  translateX(-45px) rotate(180deg) scale(1.0); }
+  75%  { transform: translateY(25vh)  translateX(65px)  rotate(270deg) scale(1.05); }
+  90%  { opacity: 0.65; }
+  100% { transform: translateY(-12vh) translateX(-25px) rotate(360deg) scale(1.1); opacity: 0; }
+}
+
+@keyframes flowerFloatDown {
+  0%   { transform: translateY(-10vh) translateX(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
+  8%   { opacity: 0.65; }
+  25%  { transform: translateY(25vh)  translateX(-55px) rotate(90deg)  scale(0.9); }
+  50%  { transform: translateY(50vh)  translateX(50px)  rotate(180deg) scale(1.0); }
+  75%  { transform: translateY(75vh)  translateX(-60px) rotate(270deg) scale(1.05); }
+  90%  { opacity: 0.65; }
+  100% { transform: translateY(112vh) translateX(30px)  rotate(360deg) scale(1.1); opacity: 0; }
+}
+
+@keyframes flowerFloatRight {
+  0%   { transform: translateX(-10vw) translateY(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
+  8%   { opacity: 0.65; }
+  25%  { transform: translateX(25vw)  translateY(-50px) rotate(90deg)  scale(0.9); }
+  50%  { transform: translateX(50vw)  translateY(55px)  rotate(180deg) scale(1.0); }
+  75%  { transform: translateX(75vw)  translateY(-45px) rotate(270deg) scale(1.05); }
+  90%  { opacity: 0.65; }
+  100% { transform: translateX(112vw) translateY(30px)  rotate(360deg) scale(1.1); opacity: 0; }
+}
+
+@keyframes flowerFloatLeft {
+  0%   { transform: translateX(110vw) translateY(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
+  8%   { opacity: 0.65; }
+  25%  { transform: translateX(75vw)  translateY(50px)  rotate(90deg)  scale(0.9); }
+  50%  { transform: translateX(50vw)  translateY(-55px) rotate(180deg) scale(1.0); }
+  75%  { transform: translateX(25vw)  translateY(45px)  rotate(270deg) scale(1.05); }
+  90%  { opacity: 0.65; }
+  100% { transform: translateX(-12vw) translateY(-30px) rotate(360deg) scale(1.1); opacity: 0; }
 }
 
 .topbar {
