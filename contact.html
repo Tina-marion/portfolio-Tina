@@ -31,10 +31,12 @@
         <h1>Contact</h1>
         <h2>Get in touch before I write another line of code!</h2>
 
-        <form class="contact-form" action="https://formsubmit.co/tinaamarion@gmail.com" method="post">
-          <input type="hidden" name="_subject" value="New portfolio message" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
+        <form
+          class="contact-form"
+          data-emailjs-service-id="service_dis3uss"
+          data-emailjs-template-id="template_am7zqvr"
+          data-emailjs-public-key="YIUkRNx7tZ8PXi8wM"
+        >
           <label for="name">Name<span class="req">*</span></label>
           <input id="name" name="name" type="text" placeholder="Your name, your fame" required />
 
@@ -55,6 +57,7 @@
         </div>
       </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

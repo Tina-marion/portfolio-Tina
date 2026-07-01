@@ -70,7 +70,7 @@ html:not([data-theme="dark"]) .floating-flower {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translate3d(0, -18px, 0) rotate(12deg);
+    transform: translate3d(0, -26px, 0) rotate(14deg);
   }
   100% {
     transform: translate3d(0, 0, 0) rotate(0deg);

@@ -201,7 +201,7 @@ initMusicControl();
     flower.style.height = `${size}px`;
     flower.style.left = `${Math.random() * 100}vw`;
     flower.style.top = `${Math.random() * 100}vh`;
-    flower.style.animationDuration = `${18 + Math.random() * 12}s`;
+    flower.style.animationDuration = `${8 + Math.random() * 4}s`;
     flower.style.animationDelay = `${Math.random() * 6}s`;
     flower.innerHTML = petals[Math.floor(Math.random() * petals.length)];
     document.body.appendChild(flower);
@@ -251,10 +251,65 @@ function initContactForm() {
   }
 
   const statusEl = document.getElementById("contactStatus");
+  const serviceId = form.dataset.emailjsServiceId;
+  const templateId = form.dataset.emailjsTemplateId;
+  const publicKey = form.dataset.emailjsPublicKey;
 
-  if (statusEl) {
-    statusEl.textContent = "This form sends directly to my inbox.";
+  if (!window.emailjs || !serviceId || !templateId || !publicKey || serviceId.startsWith("YOUR_") || templateId.startsWith("YOUR_") || publicKey.startsWith("YOUR_")) {
+    if (statusEl) {
+      statusEl.textContent = "Add your EmailJS service ID, template ID, and public key to enable automatic sending.";
+    }
+    return;
   }
+
+  window.emailjs.init({ publicKey });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      if (statusEl) {
+        statusEl.textContent = "Please fill in your name, email, and message.";
+      }
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+    if (statusEl) {
+      statusEl.textContent = "Sending your message...";
+    }
+
+    try {
+      await window.emailjs.send(serviceId, templateId, {
+        from_name: name,
+        from_email: email,
+        email,
+        reply_to: email,
+        message,
+        to_email: "tinaamarion@gmail.com"
+      });
+
+      form.reset();
+      if (statusEl) {
+        statusEl.textContent = "Message sent to tinaamarion@gmail.com.";
+      }
+    } catch {
+      if (statusEl) {
+        statusEl.textContent = "I couldn't send the message. Check your EmailJS settings and try again.";
+      }
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
+  });
 }
 
 initContactForm();
