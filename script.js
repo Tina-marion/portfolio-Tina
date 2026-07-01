@@ -186,46 +186,28 @@ initMusicControl();
 
 (function spawnFloatingFlowers() {
   const petals = [
-    /* pink */     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffb7c5" opacity=".85" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffb7c5" opacity=".85" transform="rotate(60 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffb7c5" opacity=".85" transform="rotate(120 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffc8d4" opacity=".85" transform="rotate(180 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffc8d4" opacity=".85" transform="rotate(240 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffc8d4" opacity=".85" transform="rotate(300 20 20)"/><circle cx="20" cy="20" r="5" fill="#ffe48a"/></g></svg>',
-    /* blue */     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#aad3ff" opacity=".85" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#aad3ff" opacity=".85" transform="rotate(60 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#aad3ff" opacity=".85" transform="rotate(120 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#c5e2ff" opacity=".85" transform="rotate(180 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#c5e2ff" opacity=".85" transform="rotate(240 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#c5e2ff" opacity=".85" transform="rotate(300 20 20)"/><circle cx="20" cy="20" r="5" fill="#fff5a0"/></g></svg>',
-    /* lavender */ '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d4b4fe" opacity=".85" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d4b4fe" opacity=".85" transform="rotate(60 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d4b4fe" opacity=".85" transform="rotate(120 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#e8d0ff" opacity=".85" transform="rotate(180 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#e8d0ff" opacity=".85" transform="rotate(240 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#e8d0ff" opacity=".85" transform="rotate(300 20 20)"/><circle cx="20" cy="20" r="5" fill="#ffe48a"/></g></svg>',
-    /* white */    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffffff" opacity=".7" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffffff" opacity=".7" transform="rotate(60 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffffff" opacity=".7" transform="rotate(120 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#f0f0ff" opacity=".7" transform="rotate(180 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#f0f0ff" opacity=".7" transform="rotate(240 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#f0f0ff" opacity=".7" transform="rotate(300 20 20)"/><circle cx="20" cy="20" r="5" fill="#ffe48a"/></g></svg>'
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffb7c5" opacity=".8" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffc8d4" opacity=".8" transform="rotate(72 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffd7e0" opacity=".8" transform="rotate(144 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffc8d4" opacity=".8" transform="rotate(216 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#ffb7c5" opacity=".8" transform="rotate(288 20 20)"/><circle cx="20" cy="20" r="5" fill="#ffe48a"/></g></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#aad3ff" opacity=".8" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#c5e2ff" opacity=".8" transform="rotate(72 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d7ecff" opacity=".8" transform="rotate(144 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#c5e2ff" opacity=".8" transform="rotate(216 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#aad3ff" opacity=".8" transform="rotate(288 20 20)"/><circle cx="20" cy="20" r="5" fill="#fff5a0"/></g></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="none"><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d4b4fe" opacity=".8" transform="rotate(0 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#e4cbff" opacity=".8" transform="rotate(72 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#f0e0ff" opacity=".8" transform="rotate(144 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#e4cbff" opacity=".8" transform="rotate(216 20 20)"/><ellipse cx="20" cy="10" rx="6" ry="10" fill="#d4b4fe" opacity=".8" transform="rotate(288 20 20)"/><circle cx="20" cy="20" r="5" fill="#ffe48a"/></g></svg>'
   ];
 
-  const COUNT = 26;
-
-  const directions = [
-    { anim: "flowerFloatUp",    posAxis: "left",   posRange: 100, unit: "vw", crossAxis: "bottom", crossVal: "-60px" },
-    { anim: "flowerFloatDown",  posAxis: "left",   posRange: 100, unit: "vw", crossAxis: "top",    crossVal: "-60px" },
-    { anim: "flowerFloatRight", posAxis: "top",    posRange: 100, unit: "vh", crossAxis: "left",   crossVal: "-60px" },
-    { anim: "flowerFloatLeft",  posAxis: "top",    posRange: 100, unit: "vh", crossAxis: "right",  crossVal: "-60px" }
-  ];
+  const count = 5;
 
   function createFlower() {
-    const el = document.createElement("div");
-    el.className = "floating-flower";
-    const size = 28 + Math.random() * 36;
-    el.style.width  = size + "px";
-    el.style.height = size + "px";
-    const dir = directions[Math.floor(Math.random() * directions.length)];
-    el.style[dir.posAxis]   = (Math.random() * dir.posRange) + dir.unit;
-    el.style[dir.crossAxis] = dir.crossVal;
-    el.innerHTML = petals[Math.floor(Math.random() * petals.length)];
-    const duration = 8 + Math.random() * 10;
-    const delay    = Math.random() * 4;
-    el.style.animationName     = dir.anim;
-    el.style.animationDuration = duration + "s";
-    el.style.animationDelay    = delay + "s";
-    el.style.animationTimingFunction = "linear";
-    el.style.animationIterationCount = "infinite";
-    document.body.appendChild(el);
-
-    el.addEventListener("animationiteration", () => {
-      el.style[dir.posAxis] = (Math.random() * dir.posRange) + dir.unit;
-    });
+    const flower = document.createElement("div");
+    flower.className = "floating-flower";
+    const size = 22 + Math.random() * 20;
+    flower.style.width = `${size}px`;
+    flower.style.height = `${size}px`;
+    flower.style.left = `${Math.random() * 100}vw`;
+    flower.style.top = `${Math.random() * 100}vh`;
+    flower.style.animationDuration = `${18 + Math.random() * 12}s`;
+    flower.style.animationDelay = `${Math.random() * 6}s`;
+    flower.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+    document.body.appendChild(flower);
   }
 
-  for (let i = 0; i < COUNT; i++) {
+  for (let index = 0; index < count; index += 1) {
     createFlower();
   }
 }());
@@ -269,32 +251,10 @@ function initContactForm() {
   }
 
   const statusEl = document.getElementById("contactStatus");
-  const recipient = form.dataset.recipient || "tinaamarion@gmail.com";
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    if (!name || !email || !message || !emailValid) {
-      if (statusEl) {
-        statusEl.textContent = "Please enter a valid name, email, and message.";
-      }
-      return;
-    }
-
-    const subject = `Portfolio contact from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    if (statusEl) {
-      statusEl.textContent = "Opening your email app to send the message...";
-    }
-    window.location.href = mailtoUrl;
-  });
+  if (statusEl) {
+    statusEl.textContent = "This form sends directly to my inbox.";
+  }
 }
 
 initContactForm();

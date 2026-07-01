@@ -7,7 +7,6 @@
   --line: #b9c7eb;
   --active: #c9d8fb;
   --pill: #f2f6ff;
-  --flower-opacity: 0.45;
 }
 
 html[data-theme="dark"] {
@@ -19,7 +18,6 @@ html[data-theme="dark"] {
   --line: #1d315d;
   --active: #17305f;
   --pill: #0f2349;
-  --flower-opacity: 0.32;
 }
 
 * {
@@ -48,53 +46,35 @@ body {
 .floating-flower {
   position: fixed;
   pointer-events: none;
-  z-index: 2;
-  opacity: 0;
+  z-index: 1;
+  opacity: 0.22;
   will-change: transform, opacity;
+  animation-name: flowerDrift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.floating-flower svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 html:not([data-theme="dark"]) .floating-flower {
-  filter: saturate(1.6) brightness(0.55);
+  opacity: 0.3;
+  filter: saturate(1.5) brightness(0.65);
 }
 
-@keyframes flowerFloatUp {
-  0%   { transform: translateY(110vh) translateX(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
-  8%   { opacity: 0.65; }
-  25%  { transform: translateY(75vh)  translateX(55px)  rotate(90deg)  scale(0.9); }
-  50%  { transform: translateY(50vh)  translateX(-45px) rotate(180deg) scale(1.0); }
-  75%  { transform: translateY(25vh)  translateX(65px)  rotate(270deg) scale(1.05); }
-  90%  { opacity: 0.65; }
-  100% { transform: translateY(-12vh) translateX(-25px) rotate(360deg) scale(1.1); opacity: 0; }
-}
-
-@keyframes flowerFloatDown {
-  0%   { transform: translateY(-10vh) translateX(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
-  8%   { opacity: 0.65; }
-  25%  { transform: translateY(25vh)  translateX(-55px) rotate(90deg)  scale(0.9); }
-  50%  { transform: translateY(50vh)  translateX(50px)  rotate(180deg) scale(1.0); }
-  75%  { transform: translateY(75vh)  translateX(-60px) rotate(270deg) scale(1.05); }
-  90%  { opacity: 0.65; }
-  100% { transform: translateY(112vh) translateX(30px)  rotate(360deg) scale(1.1); opacity: 0; }
-}
-
-@keyframes flowerFloatRight {
-  0%   { transform: translateX(-10vw) translateY(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
-  8%   { opacity: 0.65; }
-  25%  { transform: translateX(25vw)  translateY(-50px) rotate(90deg)  scale(0.9); }
-  50%  { transform: translateX(50vw)  translateY(55px)  rotate(180deg) scale(1.0); }
-  75%  { transform: translateX(75vw)  translateY(-45px) rotate(270deg) scale(1.05); }
-  90%  { opacity: 0.65; }
-  100% { transform: translateX(112vw) translateY(30px)  rotate(360deg) scale(1.1); opacity: 0; }
-}
-
-@keyframes flowerFloatLeft {
-  0%   { transform: translateX(110vw) translateY(0px)   rotate(0deg)   scale(0.8); opacity: 0; }
-  8%   { opacity: 0.65; }
-  25%  { transform: translateX(75vw)  translateY(50px)  rotate(90deg)  scale(0.9); }
-  50%  { transform: translateX(50vw)  translateY(-55px) rotate(180deg) scale(1.0); }
-  75%  { transform: translateX(25vw)  translateY(45px)  rotate(270deg) scale(1.05); }
-  90%  { opacity: 0.65; }
-  100% { transform: translateX(-12vw) translateY(-30px) rotate(360deg) scale(1.1); opacity: 0; }
+@keyframes flowerDrift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(12deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
 }
 
 .topbar {
